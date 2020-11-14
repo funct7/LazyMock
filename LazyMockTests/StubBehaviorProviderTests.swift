@@ -24,12 +24,12 @@ class StubBehaviorProviderTests : XCTestCase {
         let response = 42
         
         // When
-        sut.prepare(response: response, numberOfTimes: 0)
+        sut.prepare(response: .value(response), numberOfTimes: 0)
         
         // Then
-        XCTAssertEqual(sut.stub() as? Int, response)
-        XCTAssertEqual(sut.stub() as? Int, response)
-        XCTAssertEqual(sut.stub() as? Int, response)
+        XCTAssertEqual(sut.stub().value as? Int, response)
+        XCTAssertEqual(sut.stub().value as? Int, response)
+        XCTAssertEqual(sut.stub().value as? Int, response)
     }
     
     func test_prepare_sequential() {
@@ -38,13 +38,13 @@ class StubBehaviorProviderTests : XCTestCase {
         let r2 = 31
         
         // When
-        sut.prepare(response: r1, numberOfTimes: 2)
-        sut.prepare(response: r2, numberOfTimes: 1)
+        sut.prepare(response: .value(r1), numberOfTimes: 2)
+        sut.prepare(response: .value(r2), numberOfTimes: 1)
         
         // Then
-        XCTAssertEqual(sut.stub() as? Int, r1)
-        XCTAssertEqual(sut.stub() as? Int, r1)
-        XCTAssertEqual(sut.stub() as? Int, r2)
+        XCTAssertEqual(sut.stub().value as? Int, r1)
+        XCTAssertEqual(sut.stub().value as? Int, r1)
+        XCTAssertEqual(sut.stub().value as? Int, r2)
         // Subsequent calls will crash the test
     }
     
@@ -54,13 +54,13 @@ class StubBehaviorProviderTests : XCTestCase {
         let r1 = 31
         
         // When
-        sut.prepare(response: def, numberOfTimes: 0)
-        sut.prepare(response: r1, numberOfTimes: 1)
+        sut.prepare(response: .value(def), numberOfTimes: 0)
+        sut.prepare(response: .value(r1), numberOfTimes: 1)
         
         // Then
-        XCTAssertEqual(sut.stub() as? Int, r1)
-        XCTAssertEqual(sut.stub() as? Int, def)
-        XCTAssertEqual(sut.stub() as? Int, def)
+        XCTAssertEqual(sut.stub().value as? Int, r1)
+        XCTAssertEqual(sut.stub().value as? Int, def)
+        XCTAssertEqual(sut.stub().value as? Int, def)
     }
     
 }
