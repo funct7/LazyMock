@@ -22,19 +22,19 @@ struct StubBehaviorProvider : StubProviding {
      
      - Parameter numberOfTimes: `0` is used to prepare the default response.
      */
-    func prepare(response: Any, numberOfTimes: UInt) {
-        
+    mutating func prepare(response: Any, numberOfTimes: UInt) {
+        fatalError("TODO")
     }
     
     /**
      Resets all stubbed response.
      */
-    func reset() {
-        
+    mutating func reset() {
+        fatalError("TODO")
     }
     
-    func stub() -> Any {
-        <#code#>
+    mutating func stub() -> Any {
+        fatalError("TODO")
     }
     
 }
