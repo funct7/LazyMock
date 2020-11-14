@@ -11,9 +11,9 @@ struct StubBehaviorProvider : StubProviding {
     
     // MARK: Interface
     
-    private(set) var defaultResponse: Any?
+    private(set) var defaultResponse: StubbedResponse?
     
-    private(set) var sequentialReponse: [Any] = []
+    private(set) var sequentialReponse: [StubbedResponse] = []
     
     /**
      Records the desired stubbed responses.
@@ -22,7 +22,7 @@ struct StubBehaviorProvider : StubProviding {
      
      - Parameter numberOfTimes: `0` is used to prepare the default response.
      */
-    mutating func prepare(response: Any, numberOfTimes: UInt) {
+    mutating func prepare(response: StubbedResponse, numberOfTimes: UInt) {
         
     }
     
@@ -33,8 +33,8 @@ struct StubBehaviorProvider : StubProviding {
         
     }
     
-    mutating func stub() -> Any {
-        Optional<Any>.none
+    mutating func stub() -> StubbedResponse {
+        .value(0)
     }
     
 }

@@ -12,6 +12,6 @@ protocol StubProviding {
     /**
      - Returns: The stubbed response.
      */
-    mutating func stub() -> Any
+    mutating func stub() -> StubbedResponse
     
 }
