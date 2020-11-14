@@ -13,6 +13,7 @@
 		0323110F255F5DC100E80C9A /* StubProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0323110E255F5DC100E80C9A /* StubProviding.swift */; };
 		03231116255F5F3900E80C9A /* StubBehaviorProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03231115255F5F3900E80C9A /* StubBehaviorProviderTests.swift */; };
 		0323111A255F61E600E80C9A /* StubbedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03231119255F61E600E80C9A /* StubbedResponse.swift */; };
+		0324EB8A255F7789007D363C /* BaseStubClassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324EB89255F7789007D363C /* BaseStubClassTests.swift */; };
 		03624FA2255EB1F5009F6BBD /* LazyMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03624F98255EB1F4009F6BBD /* LazyMock.framework */; };
 		03624FA9255EB1F5009F6BBD /* LazyMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 03624F9B255EB1F4009F6BBD /* LazyMock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -35,6 +36,7 @@
 		03231114255F5F3800E80C9A /* LazyMockTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LazyMockTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		03231115255F5F3900E80C9A /* StubBehaviorProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubBehaviorProviderTests.swift; sourceTree = "<group>"; };
 		03231119255F61E600E80C9A /* StubbedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubbedResponse.swift; sourceTree = "<group>"; };
+		0324EB89255F7789007D363C /* BaseStubClassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStubClassTests.swift; sourceTree = "<group>"; };
 		03624F98255EB1F4009F6BBD /* LazyMock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LazyMock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03624F9B255EB1F4009F6BBD /* LazyMock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LazyMock.h; sourceTree = "<group>"; };
 		03624F9C255EB1F4009F6BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				03231115255F5F3900E80C9A /* StubBehaviorProviderTests.swift */,
 				03624FA8255EB1F5009F6BBD /* Info.plist */,
 				03231114255F5F3800E80C9A /* LazyMockTests-Bridging-Header.h */,
+				0324EB89255F7789007D363C /* BaseStubClassTests.swift */,
 			);
 			path = LazyMockTests;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03231116255F5F3900E80C9A /* StubBehaviorProviderTests.swift in Sources */,
+				0324EB8A255F7789007D363C /* BaseStubClassTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
