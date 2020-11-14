@@ -16,7 +16,14 @@ open class BaseStubClass : Stubbing {
         isCalledReturn returnValue: Any,
         numberOfTimes count: UInt)
     {
-        fatalError("TODO")
+        stubTable.mutate(
+            key: methodName,
+            defaultValue: .init())
+        {
+            $0.prepare(
+                response: .value(returnValue),
+                numberOfTimes: count)
+        }
     }
     
     public func when(
@@ -24,18 +31,38 @@ open class BaseStubClass : Stubbing {
         isCalledThrow error: Error,
         numberOfTimes count: UInt)
     {
-        fatalError("TODO")
+        stubTable.mutate(
+            key: methodName,
+            defaultValue: .init())
+        {
+            $0.prepare(
+                response: .error(error),
+                numberOfTimes: count)
+        }
     }
     
     public func resetStubBehavior() {
-        fatalError("TODO")
+        stubTable = [:]
     }
     
-    public func stub<T>(_ methodName: String) throws -> T? {
-        fatalError("TODO")
+    public func stub<T>(_ methodName: String) throws -> T {
+        // FIXME: Throw error if nil
+        var provider = stubTable[methodName]!
+        // FIMXE: Throw error if cannot stub
+        
+        let stubbedResponse = provider.stub()
+        
+        stubTable[methodName] = provider
+        
+        switch stubbedResponse {
+        case .value(let value): return value as! T // TODO: should throw error?
+        case .error(let error): throw error
+        }
     }
     
     // MARK: Private
+    
+    private var stubTable: [String : StubBehaviorProvider] = [:]
     
     // MARK: Initializer
     

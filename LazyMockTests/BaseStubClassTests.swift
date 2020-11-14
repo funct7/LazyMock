@@ -102,12 +102,12 @@ private protocol SomeRepository : class {
 private class StubRepository : BaseStubClass, SomeRepository {
     
     func getAllUserIDList() throws -> [String] {
-        print(#function)
-        return []
+        return try stub(#function)
     }
     
     func createUser(id: String) throws {
-        print(#function)
+        // TODO: stub differently based on the input arg
+        return try stub(#function)
     }
     
 }
