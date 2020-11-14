@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		032310FF255F55EE00E80C9A /* Stubbing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032310FE255F55EE00E80C9A /* Stubbing.swift */; };
+		03231105255F5B6C00E80C9A /* BaseStubClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03231104255F5B6C00E80C9A /* BaseStubClass.swift */; };
 		03624FA2255EB1F5009F6BBD /* LazyMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03624F98255EB1F4009F6BBD /* LazyMock.framework */; };
 		03624FA7255EB1F5009F6BBD /* LazyMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03624FA6255EB1F5009F6BBD /* LazyMockTests.swift */; };
 		03624FA9255EB1F5009F6BBD /* LazyMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 03624F9B255EB1F4009F6BBD /* LazyMock.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		032310FE255F55EE00E80C9A /* Stubbing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubbing.swift; sourceTree = "<group>"; };
+		03231104255F5B6C00E80C9A /* BaseStubClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStubClass.swift; sourceTree = "<group>"; };
 		03624F98255EB1F4009F6BBD /* LazyMock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LazyMock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03624F9B255EB1F4009F6BBD /* LazyMock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LazyMock.h; sourceTree = "<group>"; };
 		03624F9C255EB1F4009F6BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -52,6 +54,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03231102255F5B4900E80C9A /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				032310FE255F55EE00E80C9A /* Stubbing.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		03231103255F5B5400E80C9A /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				03231104255F5B6C00E80C9A /* BaseStubClass.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
 		03624F8E255EB1F4009F6BBD = {
 			isa = PBXGroup;
 			children = (
@@ -73,7 +91,8 @@
 		03624F9A255EB1F4009F6BBD /* LazyMock */ = {
 			isa = PBXGroup;
 			children = (
-				032310FE255F55EE00E80C9A /* Stubbing.swift */,
+				03231102255F5B4900E80C9A /* Protocol */,
+				03231103255F5B5400E80C9A /* Type */,
 				03624F9B255EB1F4009F6BBD /* LazyMock.h */,
 				03624F9C255EB1F4009F6BBD /* Info.plist */,
 			);
@@ -199,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				032310FF255F55EE00E80C9A /* Stubbing.swift in Sources */,
+				03231105255F5B6C00E80C9A /* BaseStubClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

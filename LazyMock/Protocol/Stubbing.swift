@@ -55,6 +55,8 @@ public protocol Stubbing {
     
     /**
      Resets the recorded stub behavior. (Used by the test client code.)
+     
+     Calling this resets all stubbing behavior, including the default stubbed response.
      */
     func resetStubBehavior()
     
