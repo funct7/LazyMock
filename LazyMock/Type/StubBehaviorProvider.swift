@@ -21,8 +21,10 @@ struct StubBehaviorProvider : StubProviding {
     
     // MARK: Interface
     
+    /// Exposed for debug purposes
     private(set) var defaultResponse: StubbedResponse?
     
+    /// Exposed for debug purposes
     private(set) var sequentialReponse: [StubbedResponse] = []
     
     /**
