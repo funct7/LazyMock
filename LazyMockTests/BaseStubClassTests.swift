@@ -21,6 +21,41 @@ class BaseStubClassTests : XCTestCase {
         sut = .init(repository: someRepository)
     }
     
+    func test_whenReturn() {
+        // Given
+        let idList = ["foo", "bar",]
+        
+        someRepository.when(
+            "getAllUserIDList()",
+            isCalledReturn: idList,
+            numberOfTimes: 0)
+        
+        // When
+        XCTAssertNoThrow(try sut.doSomething())
+        
+        // Then
+        XCTAssertEqual(sut.allUserIDList, idList)
+    }
+    
+    func test_whenThrow() {
+        // Given
+        enum SomeError : Error { case test }
+        let error: SomeError = .test
+        
+        someRepository.when(
+            "getAllUserIDList()",
+            isCalledThrow: error,
+            numberOfTimes: 0)
+        
+        // When
+        XCTAssertThrowsError(try sut.doSomething()) {
+            XCTAssertEqual($0 as? SomeError, error)
+        }
+        
+        // Then
+        XCTAssert(sut.allUserIDList.isEmpty)
+    }
+    
 }
 
 private class SomeClass {
@@ -32,8 +67,8 @@ private class SomeClass {
     /**
      Fetches the full list of user IDs.
      */
-    func doSomething() {
-        allUserIDList = repository.getAllUserIDList()
+    func doSomething() throws {
+        allUserIDList = try repository.getAllUserIDList()
     }
     
     /**
@@ -41,7 +76,7 @@ private class SomeClass {
      */
     func doSomethingElse() throws {
         try repository.createUser(id: UUID().uuidString)
-        doSomething()
+        try doSomething()
     }
     
     // MARK: Private
@@ -58,7 +93,7 @@ private class SomeClass {
 
 private protocol SomeRepository : class {
     
-    func getAllUserIDList() -> [String]
+    func getAllUserIDList() throws -> [String]
     
     func createUser(id: String) throws
     
@@ -66,7 +101,7 @@ private protocol SomeRepository : class {
 
 private class StubRepository : BaseStubClass, SomeRepository {
     
-    func getAllUserIDList() -> [String] {
+    func getAllUserIDList() throws -> [String] {
         print(#function)
         return []
     }
