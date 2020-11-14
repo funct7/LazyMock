@@ -81,4 +81,16 @@ class StubBehaviorProviderTests : XCTestCase {
         XCTAssertTrue(sut.canStub)
     }
     
+    func test_reset() {
+        // Given
+        let def = 42
+        
+        // When
+        sut.prepare(response: .value(def), numberOfTimes: 0)
+        sut.reset()
+        
+        // Then
+        XCTAssertFalse(sut.canStub)
+    }
+    
 }
