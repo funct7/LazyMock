@@ -11,7 +11,7 @@ struct StubBehaviorProvider : StubProviding {
     
     // MARK: Inherit - StubProviding
     
-    var canStub: Bool { false }
+    var canStub: Bool { defaultResponse != nil || sequentialReponse.count > 0 }
     
     mutating func stub() -> StubbedResponse {
         guard sequentialReponse.count > 0 else { return defaultResponse! }
