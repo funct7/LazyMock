@@ -10,9 +10,15 @@ import LazyMock
 
 class BaseStubClassTests : XCTestCase {
     
+    private var someRepository: StubRepository!
+    private var sut: SomeClass!
+    
     override
     func setUp() {
         super.setUp()
+        
+        someRepository = .init()
+        sut = .init(repository: someRepository)
     }
     
 }

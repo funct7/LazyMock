@@ -37,4 +37,8 @@ open class BaseStubClass : Stubbing {
     
     // MARK: Private
     
+    // MARK: Initializer
+    
+    public init() { }
+    
 }
