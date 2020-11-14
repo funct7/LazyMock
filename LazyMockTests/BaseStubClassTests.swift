@@ -8,6 +8,7 @@
 import XCTest
 import LazyMock
 
+// TODO: Move to example app target
 class BaseStubClassTests : XCTestCase {
     
     private var someRepository: StubRepository!
