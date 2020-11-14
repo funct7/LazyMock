@@ -27,8 +27,13 @@ class StubBehaviorProviderTests : XCTestCase {
         sut.prepare(response: .value(response), numberOfTimes: 0)
         
         // Then
+        XCTAssertTrue(sut.canStub)
         XCTAssertEqual(sut.stub().value as? Int, response)
+        
+        XCTAssertTrue(sut.canStub)
         XCTAssertEqual(sut.stub().value as? Int, response)
+        
+        XCTAssertTrue(sut.canStub)
         XCTAssertEqual(sut.stub().value as? Int, response)
     }
     
@@ -42,10 +47,16 @@ class StubBehaviorProviderTests : XCTestCase {
         sut.prepare(response: .value(r2), numberOfTimes: 1)
         
         // Then
+        XCTAssertTrue(sut.canStub)
         XCTAssertEqual(sut.stub().value as? Int, r1)
+        
+        XCTAssertTrue(sut.canStub)
         XCTAssertEqual(sut.stub().value as? Int, r1)
+        
+        XCTAssertTrue(sut.canStub)
         XCTAssertEqual(sut.stub().value as? Int, r2)
-        // Subsequent calls will crash the test
+        
+        XCTAssertFalse(sut.canStub)
     }
     
     func test_prepare_defaultAndSequential() {
@@ -58,9 +69,16 @@ class StubBehaviorProviderTests : XCTestCase {
         sut.prepare(response: .value(r1), numberOfTimes: 1)
         
         // Then
+        XCTAssertTrue(sut.canStub)
         XCTAssertEqual(sut.stub().value as? Int, r1)
+        
+        XCTAssertTrue(sut.canStub)
         XCTAssertEqual(sut.stub().value as? Int, def)
+        
+        XCTAssertTrue(sut.canStub)
         XCTAssertEqual(sut.stub().value as? Int, def)
+        
+        XCTAssertTrue(sut.canStub)
     }
     
 }

@@ -9,6 +9,16 @@ import Foundation
 
 struct StubBehaviorProvider : StubProviding {
     
+    // MARK: Inherit - StubProviding
+    
+    var canStub: Bool { false }
+    
+    mutating func stub() -> StubbedResponse {
+        guard sequentialReponse.count > 0 else { return defaultResponse! }
+        return sequentialReponse.removeFirst()
+    }
+    
+    
     // MARK: Interface
     
     private(set) var defaultResponse: StubbedResponse?
@@ -38,11 +48,6 @@ struct StubBehaviorProvider : StubProviding {
     mutating func reset() {
         defaultResponse = nil
         sequentialReponse = []
-    }
-    
-    mutating func stub() -> StubbedResponse {
-        guard sequentialReponse.count > 0 else { return defaultResponse! }
-        return sequentialReponse.removeFirst()
     }
     
 }
