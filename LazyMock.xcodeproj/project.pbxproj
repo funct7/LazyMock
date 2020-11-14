@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		032310FF255F55EE00E80C9A /* Stubbing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032310FE255F55EE00E80C9A /* Stubbing.swift */; };
 		03624FA2255EB1F5009F6BBD /* LazyMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03624F98255EB1F4009F6BBD /* LazyMock.framework */; };
 		03624FA7255EB1F5009F6BBD /* LazyMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03624FA6255EB1F5009F6BBD /* LazyMockTests.swift */; };
 		03624FA9255EB1F5009F6BBD /* LazyMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 03624F9B255EB1F4009F6BBD /* LazyMock.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,6 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		032310FE255F55EE00E80C9A /* Stubbing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stubbing.swift; sourceTree = "<group>"; };
 		03624F98255EB1F4009F6BBD /* LazyMock.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LazyMock.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03624F9B255EB1F4009F6BBD /* LazyMock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LazyMock.h; sourceTree = "<group>"; };
 		03624F9C255EB1F4009F6BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 		03624F9A255EB1F4009F6BBD /* LazyMock */ = {
 			isa = PBXGroup;
 			children = (
+				032310FE255F55EE00E80C9A /* Stubbing.swift */,
 				03624F9B255EB1F4009F6BBD /* LazyMock.h */,
 				03624F9C255EB1F4009F6BBD /* Info.plist */,
 			);
@@ -147,6 +150,7 @@
 				TargetAttributes = {
 					03624F97255EB1F4009F6BBD = {
 						CreatedOnToolsVersion = 12.1;
+						LastSwiftMigration = 1220;
 					};
 					03624FA0255EB1F5009F6BBD = {
 						CreatedOnToolsVersion = 12.1;
@@ -194,6 +198,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				032310FF255F55EE00E80C9A /* Stubbing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +346,7 @@
 		03624FAD255EB1F5009F6BBD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 78S7RATURK;
@@ -359,6 +365,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = io.buxx.LazyMock;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -367,6 +374,7 @@
 		03624FAE255EB1F5009F6BBD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 78S7RATURK;
@@ -393,6 +401,7 @@
 		03624FB0255EB1F5009F6BBD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78S7RATURK;
 				INFOPLIST_FILE = LazyMockTests/Info.plist;
@@ -411,6 +420,7 @@
 		03624FB1255EB1F5009F6BBD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78S7RATURK;
 				INFOPLIST_FILE = LazyMockTests/Info.plist;
