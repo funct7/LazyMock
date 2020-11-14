@@ -74,8 +74,8 @@
 			isa = PBXGroup;
 			children = (
 				03231104255F5B6C00E80C9A /* BaseStubClass.swift */,
-				0323110A255F5CE900E80C9A /* StubBehaviorProvider.swift */,
 				03231119255F61E600E80C9A /* StubbedResponse.swift */,
+				0323110A255F5CE900E80C9A /* StubBehaviorProvider.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -112,8 +112,8 @@
 		03624FA5255EB1F5009F6BBD /* LazyMockTests */ = {
 			isa = PBXGroup;
 			children = (
-				03624FA8255EB1F5009F6BBD /* Info.plist */,
 				03231115255F5F3900E80C9A /* StubBehaviorProviderTests.swift */,
+				03624FA8255EB1F5009F6BBD /* Info.plist */,
 				03231114255F5F3800E80C9A /* LazyMockTests-Bridging-Header.h */,
 			);
 			path = LazyMockTests;
