@@ -23,18 +23,26 @@ struct StubBehaviorProvider : StubProviding {
      - Parameter numberOfTimes: `0` is used to prepare the default response.
      */
     mutating func prepare(response: StubbedResponse, numberOfTimes: UInt) {
-        
+        if numberOfTimes == 0 {
+            defaultResponse = response
+        } else {
+            sequentialReponse += [StubbedResponse](
+                repeating: response,
+                count: Int(numberOfTimes))
+        }
     }
     
     /**
      Resets all stubbed response.
      */
     mutating func reset() {
-        
+        defaultResponse = nil
+        sequentialReponse = []
     }
     
     mutating func stub() -> StubbedResponse {
-        .value(0)
+        guard sequentialReponse.count > 0 else { return defaultResponse! }
+        return sequentialReponse.removeFirst()
     }
     
 }
