@@ -11,6 +11,7 @@ import LazyMock
 // TODO: Move to example app target
 class BaseStubClassTests : XCTestCase {
     
+    // FIXME: sut is the repo...
     private var someRepository: StubRepository!
     private var sut: SomeClass!
     
@@ -92,6 +93,18 @@ class BaseStubClassTests : XCTestCase {
         }
         // Then
         XCTAssert(sut.allUserIDList.isEmpty)
+    }
+    
+    func test_reset() {
+        // Given
+        test_whenReturn()
+        someRepository.resetStubBehavior()
+        
+        // When
+        // Then
+        XCTAssertThrowsError(try sut.doSomething()) {
+            XCTAssertEqual($0 as? StubError, .stubNotFound)
+        }
     }
     
 }
