@@ -46,16 +46,18 @@ open class BaseStubClass : Stubbing {
     }
     
     public func stub<T>(_ methodName: String) throws -> T {
-        // FIXME: Throw error if nil
-        var provider = stubTable[methodName]!
-        // FIMXE: Throw error if cannot stub
+        guard var provider = stubTable[methodName], provider.canStub
+        else { throw StubError.stubNotFound }
         
         let stubbedResponse = provider.stub()
         
         stubTable[methodName] = provider
         
         switch stubbedResponse {
-        case .value(let value): return value as! T // TODO: should throw error?
+        case .value(let value):
+            guard let value = value as? T else { throw StubError.invalidStubResponse }
+            return value
+            
         case .error(let error): throw error
         }
     }

@@ -57,6 +57,43 @@ class BaseStubClassTests : XCTestCase {
         XCTAssert(sut.allUserIDList.isEmpty)
     }
     
+    func test_throwsStubNotFound() {
+        // Given
+        let idList = ["foo",]
+        someRepository.when(
+            "getAllUserIDList()",
+            isCalledReturn: idList,
+            numberOfTimes: 1)
+        
+        // When
+        XCTAssertNoThrow(try sut.doSomething())
+        XCTAssertEqual(sut.allUserIDList, idList)
+        sut = .init(repository: someRepository)
+        
+        XCTAssertThrowsError(try sut.doSomething()) {
+            XCTAssertEqual($0 as? StubError, .stubNotFound)
+        }
+        // Then
+        XCTAssert(sut.allUserIDList.isEmpty)
+    }
+    
+    func test_throwsInvalidStub() {
+        // Given
+        let invalidResponse = 0
+        
+        someRepository.when(
+            "getAllUserIDList()",
+            isCalledReturn: invalidResponse,
+            numberOfTimes: 0)
+        
+        // When
+        XCTAssertThrowsError(try sut.doSomething()) {
+            XCTAssertEqual($0 as? StubError, .invalidStubResponse)
+        }
+        // Then
+        XCTAssert(sut.allUserIDList.isEmpty)
+    }
+    
 }
 
 private class SomeClass {
