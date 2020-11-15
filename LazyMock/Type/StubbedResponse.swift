@@ -10,6 +10,7 @@ import Foundation
 enum StubbedResponse {
     case value(Any)
     case error(Error)
+    case matcher(([Any]) -> StubbedResponse)
 }
 
 extension StubbedResponse {
@@ -22,6 +23,16 @@ extension StubbedResponse {
     var error: Error? {
         guard case .error(let error) = self else { return nil }
         return error
+    }
+    
+    var isMatcher: Bool {
+        guard case .matcher = self else { return false }
+        return true
+    }
+    
+    func matchArgument(_ args: [Any]) -> StubbedResponse? {
+        guard case .matcher(let matcher) = self else { return nil }
+        return matcher(args)
     }
     
 }

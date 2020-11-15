@@ -67,6 +67,8 @@ open class BaseStubClass : Stubbing {
             return value
             
         case .error(let error): throw error
+        case .matcher(let matcher):
+            fatalError("TODO")
         }
     }
     
