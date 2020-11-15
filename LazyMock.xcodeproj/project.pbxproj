@@ -18,6 +18,7 @@
 		0324EB95255F7E88007D363C /* DictionaryExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0324EB94255F7E88007D363C /* DictionaryExtensionTests.swift */; };
 		03624FA2255EB1F5009F6BBD /* LazyMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03624F98255EB1F4009F6BBD /* LazyMock.framework */; };
 		03624FA9255EB1F5009F6BBD /* LazyMock.h in Headers */ = {isa = PBXBuildFile; fileRef = 03624F9B255EB1F4009F6BBD /* LazyMock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03C66E7E2560CD6A00A08A5F /* StubError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C66E7D2560CD6A00A08A5F /* StubError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		03624F9C255EB1F4009F6BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03624FA1255EB1F5009F6BBD /* LazyMockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LazyMockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03624FA8255EB1F5009F6BBD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03C66E7D2560CD6A00A08A5F /* StubError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				03231104255F5B6C00E80C9A /* BaseStubClass.swift */,
 				03231119255F61E600E80C9A /* StubbedResponse.swift */,
 				0323110A255F5CE900E80C9A /* StubBehaviorProvider.swift */,
+				03C66E7D2560CD6A00A08A5F /* StubError.swift */,
 			);
 			path = Type;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C66E7E2560CD6A00A08A5F /* StubError.swift in Sources */,
 				032310FF255F55EE00E80C9A /* Stubbing.swift in Sources */,
 				0323110B255F5CE900E80C9A /* StubBehaviorProvider.swift in Sources */,
 				0323111A255F61E600E80C9A /* StubbedResponse.swift in Sources */,
