@@ -11,32 +11,31 @@ import LazyMock
 // TODO: Move to example app target
 class BaseStubClassTests : XCTestCase {
     
-    // FIXME: sut is the repo...
-    private var someRepository: StubRepository!
-    private var sut: SomeClass!
+    private var sut: StubRepository!
+    private var caller: SomeClass!
     
     override
     func setUp() {
         super.setUp()
         
-        someRepository = .init()
-        sut = .init(repository: someRepository)
+        sut = .init()
+        caller = .init(repository: sut)
     }
     
     func test_whenReturn() {
         // Given
         let idList = ["foo", "bar",]
         
-        someRepository.when(
+        sut.when(
             "getAllUserIDList()",
             isCalledReturn: idList,
             numberOfTimes: 0)
         
         // When
-        XCTAssertNoThrow(try sut.doSomething())
+        XCTAssertNoThrow(try caller.doSomething())
         
         // Then
-        XCTAssertEqual(sut.allUserIDList, idList)
+        XCTAssertEqual(caller.allUserIDList, idList)
     }
     
     func test_whenThrow() {
@@ -44,65 +43,65 @@ class BaseStubClassTests : XCTestCase {
         enum SomeError : Error { case test }
         let error: SomeError = .test
         
-        someRepository.when(
+        sut.when(
             "getAllUserIDList()",
             isCalledThrow: error,
             numberOfTimes: 0)
         
         // When
-        XCTAssertThrowsError(try sut.doSomething()) {
+        XCTAssertThrowsError(try caller.doSomething()) {
             XCTAssertEqual($0 as? SomeError, error)
         }
         
         // Then
-        XCTAssert(sut.allUserIDList.isEmpty)
+        XCTAssert(caller.allUserIDList.isEmpty)
     }
     
     func test_throwsStubNotFound() {
         // Given
         let idList = ["foo",]
-        someRepository.when(
+        sut.when(
             "getAllUserIDList()",
             isCalledReturn: idList,
             numberOfTimes: 1)
         
         // When
-        XCTAssertNoThrow(try sut.doSomething())
-        XCTAssertEqual(sut.allUserIDList, idList)
-        sut = .init(repository: someRepository)
+        XCTAssertNoThrow(try caller.doSomething())
+        XCTAssertEqual(caller.allUserIDList, idList)
+        caller = .init(repository: sut)
         
-        XCTAssertThrowsError(try sut.doSomething()) {
+        XCTAssertThrowsError(try caller.doSomething()) {
             XCTAssertEqual($0 as? StubError, .stubNotFound)
         }
         // Then
-        XCTAssert(sut.allUserIDList.isEmpty)
+        XCTAssert(caller.allUserIDList.isEmpty)
     }
     
     func test_throwsInvalidStub() {
         // Given
         let invalidResponse = 0
         
-        someRepository.when(
+        sut.when(
             "getAllUserIDList()",
             isCalledReturn: invalidResponse,
             numberOfTimes: 0)
         
         // When
-        XCTAssertThrowsError(try sut.doSomething()) {
+        XCTAssertThrowsError(try caller.doSomething()) {
             XCTAssertEqual($0 as? StubError, .invalidStubResponse)
         }
         // Then
-        XCTAssert(sut.allUserIDList.isEmpty)
+        XCTAssert(caller.allUserIDList.isEmpty)
     }
     
     func test_reset() {
         // Given
         test_whenReturn()
-        someRepository.resetStubBehavior()
+        sut.resetStubBehavior()
         
         // When
         // Then
-        XCTAssertThrowsError(try sut.doSomething()) {
+        XCTAssertThrowsError(try caller.doSomething()) {
             XCTAssertEqual($0 as? StubError, .stubNotFound)
         }
     }
