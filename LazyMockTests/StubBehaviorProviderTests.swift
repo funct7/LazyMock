@@ -37,6 +37,26 @@ class StubBehaviorProviderTests : XCTestCase {
         XCTAssertEqual(sut.stub().value as? Int, response)
     }
     
+    func test_prepare_defaultClosure() {
+        // Given
+        enum LocalTestError : Error { case expected }
+        let block: ([Any]) -> StubbedResponse = { (args) in
+            let input = args[0] as! Int
+            guard input >= 0 else { return .error(LocalTestError.expected) }
+            return .value(input + 1)
+        }
+        
+        // When
+        sut.prepare(response: .matcher(block), numberOfTimes: 0)
+        
+        // Then
+        XCTAssertTrue(sut.canStub)
+        XCTAssertTrue(sut.stub().isMatcher)
+        XCTAssertEqual(sut.stub().matchArgument([0])?.value as? Int, 1)
+        XCTAssertEqual(sut.stub().matchArgument([1])?.value as? Int, 2)
+        XCTAssertEqual(sut.stub().matchArgument([-1])?.error as? LocalTestError, .expected)
+    }
+    
     func test_prepare_sequential() {
         // Given
         let r1 = 42
