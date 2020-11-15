@@ -9,6 +9,8 @@ import Foundation
 
 public protocol Stubbing {
     
+    typealias StubLogic = ([Any]) throws -> Any
+    
     /**
      Stubs the result of a method call `count` number of times. (Used by the test client code.)
   
@@ -52,6 +54,25 @@ public protocol Stubbing {
         _ methodName: String,
         isCalledThrow error: Error,
         numberOfTimes count: UInt)
+    
+    /**
+     Stubs the method call using the provided code `count` number of times. (Used by the test client code.)
+     
+     The behavior is accumulative. (Check documentation for `when(_:isCalledReturn:numberOfTimes:)`.
+     The accumulative effect is shared with all other stubbing method calls and is reset likewise.
+     
+     Use this method when stub behavior should be provided depending on which arguments are passed in.
+     
+     - Parameters:
+        - methodName: The method whose result to stub.
+        - execute: The code block providing the comparison and return logic.
+        - count: The number of times to stub. Use `0` to set the default stub behavior.
+     */
+    func when(
+        _ methodName: String,
+        isCalledThen execute: @escaping StubLogic,
+        numberOfTimes count: UInt)
+    
     
     /**
      Resets the recorded stub behavior. (Used by the test client code.)

@@ -41,6 +41,14 @@ open class BaseStubClass : Stubbing {
         }
     }
     
+    public func when(
+        _ methodName: String,
+        isCalledThen execute: @escaping StubLogic,
+        numberOfTimes count: UInt)
+    {
+        print(#function)
+    }
+    
     public func resetStubBehavior() {
         stubTable = [:]
     }
