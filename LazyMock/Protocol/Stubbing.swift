@@ -88,6 +88,15 @@ public protocol Stubbing {
      
      - Throws: `StubError`
      */
-    func stub<T>(_ methodName: String) throws -> T?
+    func stub<T>(_ methodName: String) throws -> T
+    
+    /**
+     Provides a stubbed response to the method call. (Used by the manually mocked object.)
+     
+     If `when(_:isCalledThrow:numberOfTimes:)` was not invoked, no error will be thrown; i.e. it is safe to call with `try!`.
+     
+     - Throws: `StubError`
+     */
+    func stub<T>(_ methodName: String, args: [Any]) throws -> T
     
 }

@@ -57,6 +57,48 @@ class BaseStubClassTests : XCTestCase {
         XCTAssert(caller.allUserIDList.isEmpty)
     }
     
+    func test_matcher() {
+        // Given
+        let id1 = UUID().uuidString
+        let id2 = ""
+        let idList = ["foo", id1,]
+        
+        enum SomeError : Error { case test }
+
+        let argMatcher: ([Any]) throws -> Any = {
+            let id = $0[0] as! String
+            guard id.count > 0 else { throw SomeError.test }
+            return Void()
+        }
+        
+        sut.when(
+            "createUser(id:)",
+            isCalledThen: argMatcher,
+            numberOfTimes: 0)
+        sut.when(
+            "getAllUserIDList()",
+            isCalledReturn: idList,
+            numberOfTimes: 0)
+        
+        XCTAssertTrue(caller.allUserIDList.isEmpty)
+        
+        // When - case 1
+        XCTAssertNoThrow(try caller.doSomethingElse(id: id1))
+        
+        // Then
+        XCTAssertEqual(caller.allUserIDList, idList)
+        
+        // When - case 2
+        caller = .init(repository: sut)
+        
+        XCTAssertThrowsError(try caller.doSomethingElse(id: id2)) {
+            XCTAssertEqual($0 as? SomeError, .test)
+        }
+        
+        // Then
+        XCTAssert(caller.allUserIDList.isEmpty)
+    }
+    
     func test_throwsStubNotFound() {
         // Given
         let idList = ["foo",]
@@ -124,8 +166,8 @@ private class SomeClass {
     /**
      Creates a new user ID and refreshes `allUserIDList`.
      */
-    func doSomethingElse() throws {
-        try repository.createUser(id: UUID().uuidString)
+    func doSomethingElse(id: String) throws {
+        try repository.createUser(id: id)
         try doSomething()
     }
     
@@ -157,7 +199,7 @@ private class StubRepository : BaseStubClass, SomeRepository {
     
     func createUser(id: String) throws {
         // TODO: stub differently based on the input arg
-        return try stub(#function)
+        let _: Void? = try stub(#function, args: [id])
     }
     
 }

@@ -46,7 +46,22 @@ open class BaseStubClass : Stubbing {
         isCalledThen execute: @escaping StubLogic,
         numberOfTimes count: UInt)
     {
-        print(#function)
+        let matcher: StubbedResponse = .matcher({
+            do {
+                return .value(try execute($0))
+            } catch {
+                return .error(error)
+            }
+        })
+        
+        stubTable.mutate(
+            key: methodName,
+            defaultValue: .init())
+        {
+            $0.prepare(
+                response: matcher,
+                numberOfTimes: count)
+        }
     }
     
     public func resetStubBehavior() {
@@ -54,6 +69,10 @@ open class BaseStubClass : Stubbing {
     }
     
     public func stub<T>(_ methodName: String) throws -> T {
+        return try stub(methodName, args: [])
+    }
+    
+    public func stub<T>(_ methodName: String, args: [Any]) throws -> T {
         guard var provider = stubTable[methodName], provider.canStub
         else { throw StubError.stubNotFound }
         
@@ -61,15 +80,7 @@ open class BaseStubClass : Stubbing {
         
         stubTable[methodName] = provider
         
-        switch stubbedResponse {
-        case .value(let value):
-            guard let value = value as? T else { throw StubError.invalidStubResponse }
-            return value
-            
-        case .error(let error): throw error
-        case .matcher(let matcher):
-            fatalError("TODO")
-        }
+        return try stubbedResponse.extractValue(args: args)
     }
     
     // MARK: Private
@@ -79,5 +90,22 @@ open class BaseStubClass : Stubbing {
     // MARK: Initializer
     
     public init() { }
+    
+}
+
+private extension StubbedResponse {
+    
+    func extractValue<T>(args: [Any] = []) throws -> T {
+        switch self {
+        case .value(let value):
+            guard let value = value as? T else { throw StubError.invalidStubResponse }
+            return value
+            
+        case .error(let error): throw error
+        
+        case .matcher(let matcher):
+            return try matcher(args).extractValue()
+        }
+    }
     
 }
