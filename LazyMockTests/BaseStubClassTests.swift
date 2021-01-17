@@ -89,7 +89,7 @@ class BaseStubClassTests : XCTestCase {
         XCTAssertEqual(caller.allUserIDList, idList)
         
         // When - case 2
-        caller = .init(repository: sut)
+        caller.allUserIDList = []
         
         XCTAssertThrowsError(try caller.doSomethingElse(id: id2)) {
             XCTAssertEqual($0 as? SomeError, .test)
@@ -112,7 +112,7 @@ class BaseStubClassTests : XCTestCase {
         XCTAssertEqual(caller.allUserIDList, idList)
         caller = .init(repository: sut)
         
-        XCTAssertThrowsError(try caller.doSomething()) {
+        XCTAssertThrowsError(try caller.doSomething()) { // stubbed response available for only 1 time
             XCTAssertEqual($0 as? StubError, .stubNotFound)
         }
         // Then
@@ -125,7 +125,7 @@ class BaseStubClassTests : XCTestCase {
         
         sut.when(
             "getAllUserIDList()",
-            isCalledReturn: invalidResponse,
+            isCalledReturn: invalidResponse,  // wrong type. needs to be [String]
             numberOfTimes: 0)
         
         // When
@@ -154,7 +154,7 @@ private class SomeClass {
     
     // MARK: Interface
     
-    private(set) var allUserIDList: [String] = []
+    var allUserIDList: [String] = []
     
     /**
      Fetches the full list of user IDs.
